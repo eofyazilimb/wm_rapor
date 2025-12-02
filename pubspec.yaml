@@ -1,0 +1,103 @@
+name: wm_rapor
+description: "A new Flutter plugin project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.9.0
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+  dio: ^5.9.0
+  flutter_bloc: ^9.1.1
+  flutter_easyloading: ^3.0.5
+  # pluto_grid: ^7.0.2
+  # pluto_grid_export: ^1.0.6
+  pdf: ^3.10.7
+  uuid: ^4.5.2
+  turkish: ^0.2.1
+  intl: any
+  pie_chart: ^5.3.2
+  share_plus: ^10.1.4
+  # share_extend: ^2.0.0
+  # path_provider: ^2.1.1
+  #fl_chart: ^0.63.0
+  d_chart: ^2.10.5
+  pinch_zoom: ^2.0.0
+  http: ^1.1.0
+  date_field: ^6.0.3+1
+  multi_select_flutter: ^4.1.3
+  graphic: ^2.2.1
+  multi_dropdown: ^3.0.1
+  pluto_grid_plus: ^8.4.13
+  pluto_grid_plus_export: ^1.0.6
+  google_fonts: ^6.2.1
+  infinite_scroll_pagination: ^4.0.0
+  phosphor_flutter: ^2.1.0
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.example.wm_rapor
+        pluginClass: WmRaporPlugin
+      ios:
+        pluginClass: WmRaporPlugin
+
+  # To add assets to your plugin package, add an assets section, like this:
+  assets:
+    - assets/banka_raporlari_menu.svg
+    - assets/cari_raporlari_menu.svg
+    - assets/kasa_raporlari_menu.svg
+    - assets/kiymetli_evrak_menu.svg
+    - assets/ozel_raporlar_menu.svg
+    - assets/satinalma_menu.svg
+    - assets/satis_raporlari_menu.svg
+    - assets/stok_raporlari_menu.svg
+    - assets/wm_loading.gif
+    - assets/file_search.svg
+    - assets/access_denied.svg
+
+  fonts:
+    - family: OpenSans 
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+  #
+  # For details regarding assets in packages, see
+  # https://flutter.dev/to/asset-from-package
+  #
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # To add custom fonts to your plugin package, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts in packages, see
+  # https://flutter.dev/to/font-from-package
