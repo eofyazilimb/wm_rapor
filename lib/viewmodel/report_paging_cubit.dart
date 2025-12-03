@@ -88,6 +88,17 @@ class ReportPagingCubit extends Cubit<ReportPagingCubitState> {
       ),
     );
 
+    final bool hasSearch =
+        (state.searchccText != null && state.searchccText!.trim().isNotEmpty);
+
+    if (hasSearch) {
+      Utils().addOrSearchGroupWithComparisons(
+        filters: filters,
+        properties: ["aciklama"],
+        query: state.searchccText ?? '',
+      );
+    }
+
     data = filters;
 
     ApiResponse? listResponse;

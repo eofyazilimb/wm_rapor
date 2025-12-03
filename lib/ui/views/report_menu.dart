@@ -20,66 +20,66 @@ class ReportMenu extends StatefulWidget {
 }
 
 class _ReportMenuState extends State<ReportMenu> {
-  @override
-  void initState() {
-    context.read<ReportMenuCubit>().initPage();
-    super.initState();
-  }
+  // initState içindeki initPage çağrısını kaldırdık, aşağıda provider oluşturulurken çağrılacak.
 
   @override
   Widget build(BuildContext context) {
     final List<Permission> items = ReportSingleton().getPermissionList;
 
-    return Scaffold(
-      appBar: AppGeneralAppBar(title: 'Rapor'),
-      body: BlocBuilder<ReportMenuCubit, ReportMenuCubitState>(
-        builder: (context, state) {
-          if (state.initPageRequest == RequestState.loading) {
-            return const Center(child: AppLoading());
-          }
+    // ReportMenuCubit'i burada, sayfa oluşurken yaratıyoruz.
+    return BlocProvider(
+      create: (context) => ReportMenuCubit()..initPage(),
+      child: Scaffold(
+        appBar: AppGeneralAppBar(title: 'Rapor'),
+        body: BlocBuilder<ReportMenuCubit, ReportMenuCubitState>(
+          builder: (context, state) {
+            if (state.initPageRequest == RequestState.loading) {
+              return const Center(child: AppLoading());
+            }
 
-          return SingleChildScrollView(
-            child: Padding(
-              padding: AppSpacing.allMedium,
-              child: Column(
-                children: [
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: items.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                        ),
-                    itemBuilder: (context, index) {
-                      final item = items[index];
+            return SingleChildScrollView(
+              child: Padding(
+                padding: AppSpacing.allMedium,
+                child: Column(
+                  children: [
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: items.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8,
+                          ),
+                      itemBuilder: (context, index) {
+                        final item = items[index];
 
-                      return MenuButton(
-                        btnText: item.aciklama ?? '',
-                        btnSubText: '',
-                        color: Colors.white,
-                        processType: 0,
-                        menuIconUrl: item.iconurl!,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return ReportPagingView(perm: item);
-                              },
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
+                        return MenuButton(
+                          btnText: item.aciklama ?? '',
+                          btnSubText: '',
+                          color: Colors.white,
+                          processType: 0,
+                          menuIconUrl: item.iconurl!,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return ReportPagingView(perm: item);
+                                },
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

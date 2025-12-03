@@ -7,7 +7,8 @@ import 'package:wm_rapor/ui/views/report_view.dart';
 
 class ReportItem extends StatelessWidget {
   final ReportListModel report;
-  const ReportItem({super.key, required this.report});
+  final String reportName;
+  const ReportItem({super.key, required this.report, required this.reportName});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,8 @@ class ReportItem extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ReportScreen(reportId: report.id!),
+              builder: (context) =>
+                  ReportScreen(reportId: report.id!, reportName: reportName),
             ),
           );
         },

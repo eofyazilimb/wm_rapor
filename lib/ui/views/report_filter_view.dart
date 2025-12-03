@@ -1,56 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:wm_rapor/ui/widgets/app_general_app_bar.dart';
 
 // Projenizin yollarına göre güncelleyin
 import 'package:wm_rapor/viewmodel/report_detail_cubit.dart';
 import 'package:wm_rapor/model/report_model.dart';
 import 'package:wm_rapor/ui/common/app_constants.dart'; // enum'ların bulunduğu dosya
-
-// Eksik enum'ları tamamlayıcı olarak buraya ekliyorum.
-// Lütfen kendi app_constants.dart dosyanızı kullanın.
-
-// Aşağıdaki Enum'ların wm_rapor/ui/common/app_constants.dart içinde tanımlı olduğunu varsayıyorum:
-/*
-enum enumNesneTipi {
-  Combobox(1),
-  ButtonEdit(3),
-  LookupEdit(4),
-  DateEdit(5),
-  TextEdit(8);
-  // ... diğerleri
-
-  const enumNesneTipi(this.value);
-  final int value;
-}
-
-enum enumKarsilastirmaTipi {
-  Esittir(100),
-  Esit_Degildir(101),
-  Buyuktur(102),
-  Kucuktur(103),
-  Buyuk_Esittir(104),
-  Kucuk_Esittir(105),
-  Icerir(106),
-  Icermez(107),
-  ICinde(108), // ICinde olarak tanımlanmıştı
-  Disinda(109);
-  // ... diğerleri
-
-  const enumKarsilastirmaTipi(this.value);
-  final int value;
-}
-
-enum enumKaynakTipi {
-  Isyeri_Listesi(10),
-  Ambar_Listesi(11),
-  Cari_Kart_Kodu(12),
-  // ... diğerleri
-
-  const enumKaynakTipi(this.value);
-  final int value;
-}
-*/
 
 class ReportFilterPage extends StatelessWidget {
   const ReportFilterPage({super.key});
@@ -72,7 +28,7 @@ class ReportFilterPage extends StatelessWidget {
 
         if (filters.isEmpty && state.reportModel != null) {
           return Scaffold(
-            appBar: AppBar(title: Text("Filtreler")),
+            appBar: AppGeneralAppBar(title: "Filtreler"),
             body: Center(
               child: Text("Bu rapor için tanımlanmış filtre bulunmamaktadır."),
             ),
@@ -80,9 +36,9 @@ class ReportFilterPage extends StatelessWidget {
         }
 
         return Scaffold(
-          appBar: AppBar(
-            title: const Text("Rapor Filtreleri"),
-            actions: [
+          appBar: AppGeneralAppBar(
+            title: "Rapor Filtreleri",
+            actionButton: [
               IconButton(
                 icon: const Icon(Icons.cleaning_services),
                 tooltip: "Temizle",
@@ -218,7 +174,6 @@ class ReportFilterPage extends StatelessWidget {
           ),
         ),
         onTap: () async {
-          // Eğer değer doluysa başlangıç tarihi olarak onu kullan
           DateTime initialDate =
               (filter.degerilk != null && filter.degerilk!.isNotEmpty)
               ? DateFormat("dd.MM.yyyy").parse(filter.degerilk!)

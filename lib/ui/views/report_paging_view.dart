@@ -16,15 +16,30 @@ import 'package:wm_rapor/ui/widgets/app_loading.dart';
 import 'package:wm_rapor/ui/widgets/info_message_widget.dart';
 import 'package:wm_rapor/viewmodel/report_paging_cubit.dart';
 
-class ReportPagingView extends StatefulWidget {
+// 1. KISIM: WRAPPER (Sarmalayıcı)
+// Provider burada oluşturulur.
+class ReportPagingView extends StatelessWidget {
   final Permission perm;
   const ReportPagingView({super.key, required this.perm});
 
   @override
-  State<ReportPagingView> createState() => _ReportPagingViewState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ReportPagingCubit(),
+      child: _ReportPagingViewBody(perm: perm),
+    );
+  }
 }
 
-class _ReportPagingViewState extends State<ReportPagingView> {
+class _ReportPagingViewBody extends StatefulWidget {
+  final Permission perm;
+  const _ReportPagingViewBody({required this.perm});
+
+  @override
+  State<_ReportPagingViewBody> createState() => _ReportPagingViewBodyState();
+}
+
+class _ReportPagingViewBodyState extends State<_ReportPagingViewBody> {
   final PagingController<int, dynamic> _pagingController = PagingController(
     firstPageKey: 0,
   );
@@ -121,41 +136,6 @@ class _ReportPagingViewState extends State<ReportPagingView> {
                           },
                         ),
                   ),
-                  // AppSpacing.horizontalSpaceSmall,
-                  // Expanded(
-                  //   flex: 0,
-                  //   child: Container(
-                  //     decoration: UiHelpers.appGeneralBoxDecoration
-                  //         .copyWith(color: AppColors.kcWhite),
-                  //     child: IconButton(
-                  //       onPressed: () {
-                  //         // _openReceiptSort(context);
-                  //       },
-                  //       icon: PhosphorIcon(
-                  //         PhosphorIcons.arrowsDownUp(PhosphorIconsStyle.bold),
-                  //         color: AppColors.kcBlueGray,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  // AppSpacing.horizontalSpaceSmall,
-                  // BlocBuilder<ReportCubit, ReportCubitState>(
-                  //   builder: (context, state) {
-                  //     return Expanded(
-                  //       flex: 0,
-                  //       child: Container(
-                  //         decoration: UiHelpers.appGeneralBoxDecoration
-                  //             .copyWith(color: AppColors.kcWhite),
-                  //         child: IconButton(
-                  //           onPressed: () {
-                  //             openReceiptDraftFilters(context, state);
-                  //           },
-                  //           icon: filterIcon(context, state),
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
                 ],
               ),
               AppSpacing.verticalSpaceSmall,
@@ -175,8 +155,9 @@ class _ReportPagingViewState extends State<ReportPagingView> {
                   pagingController: _pagingController,
                   builderDelegate: PagedChildBuilderDelegate(
                     firstPageProgressIndicatorBuilder: (context) =>
-                        AppLoading(),
-                    newPageProgressIndicatorBuilder: (context) => AppLoading(),
+                        const AppLoading(),
+                    newPageProgressIndicatorBuilder: (context) =>
+                        const AppLoading(),
                     noItemsFoundIndicatorBuilder: (context) =>
                         receiptEmptyListView(),
                     firstPageErrorIndicatorBuilder: (context) => Center(
@@ -210,11 +191,11 @@ class _ReportPagingViewState extends State<ReportPagingView> {
     );
   }
 
-  listItem(item) {
-    return ReportItem(report: item);
+  Widget listItem(item) {
+    return ReportItem(report: item, reportName: widget.perm.aciklama ?? '');
   }
 
-  receiptEmptyListView() {
+  Widget receiptEmptyListView() {
     return const Center(
       child: InfoMessageWidget(
         svgPicture: 'assets/file_search.svg',

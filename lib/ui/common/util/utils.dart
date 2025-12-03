@@ -31,4 +31,27 @@ class Utils {
       "usePagination": true,
     };
   }
+
+  void addOrSearchGroupWithComparisons({
+    required List<Map<String, dynamic>> filters,
+    required List<String> properties,
+    required String query,
+  }) {
+    // final value = StringUtil.toUpperCaseString(query.trim());
+    // if (value.isEmpty || fieldComparisons.isEmpty) return;
+
+    if (query.isEmpty || properties.isEmpty) return;
+
+    for (var i = 0; i < properties.length; i++) {
+      final isFirst = i == 0;
+      filters.add(
+        Utils().filterMap(
+          propertyName: properties[i],
+          beginValue: query,
+          connector: isFirst ? 0 : 1,
+          comparison: 42,
+        ),
+      );
+    }
+  }
 }
