@@ -15,12 +15,12 @@ class ReportSingleton {
   List<Permission>? permissionList;
   ReportEnumModel? reportEnumModel;
 
-  set setUser(User usr) {
-    user = usr;
+  set setUser(Map<String, dynamic> usr) {
+    user = User.fromJson(usr);
   }
 
-  set setPermissionList(List<Permission> permList) {
-    permissionList = permList;
+  set setPermissionList(List<Map<String, dynamic>> permList) {
+    permissionList = permList.map((e) => Permission.fromJson(e)).toList();
   }
 
   set setReportEnums(ReportEnumModel rem) {

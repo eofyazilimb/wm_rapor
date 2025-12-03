@@ -65,8 +65,8 @@ class _MyAppState extends State<MyApp> {
         appToken: '0bdae46e-3300-4c33-8692-8fe8833c6edb',
         baseUrl: 'https://bcdefghjkb.webdemuhasebe.com/',
         deviceId: 'DEVICE-1234567890',
-        user: User.fromJson(user),
-        permissionList: permList.map((e) => Permission.fromJson(e)).toList(),
+        user: user,
+        permissionList: permList,
       ),
     );
   }

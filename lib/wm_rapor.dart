@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:wm_rapor/model/permission_model.dart';
-import 'package:wm_rapor/model/user_model.dart';
 import 'package:wm_rapor/services/constants/http_constants.dart';
 import 'package:wm_rapor/services/dio/dio_client.dart';
 import 'package:wm_rapor/singleton/report_singleton.dart';
@@ -13,8 +11,8 @@ class WmRapor extends StatelessWidget {
   final String baseUrl;
   final String appToken;
   final String deviceId;
-  final User user;
-  final List<Permission> permissionList;
+  final Map<String, dynamic> user;
+  final List<Map<String, dynamic>> permissionList;
 
   WmRapor({
     super.key,
